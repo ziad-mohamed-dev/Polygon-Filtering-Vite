@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import image from "./assets/0-floor.png";
 import Filter from "./components/Filter/Filter";
-import { dataContext } from "./context/SharingData";
+import { SVGContext } from "./context/SharingData";
 import PolygonDetails from "./components/PolygonDetails/PolygonDetails";
 
 function App() {
-	const { svgElement } = useContext(dataContext);
+	const svgElement = useContext(SVGContext);
 
 	// Replace the svg holder with the svg element when it is fetched
 	useEffect(() => {
@@ -13,7 +13,7 @@ function App() {
 			const svgHolder: SVGElement = document.querySelector(
 				"main .svg-holder"
 			) as SVGElement;
-			svgHolder && svgHolder.replaceWith(svgElement as HTMLElement);
+			svgHolder.replaceWith(svgElement as HTMLElement);
 		}
 	}, [svgElement]);
 

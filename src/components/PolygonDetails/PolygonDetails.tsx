@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import "./polygonDetails.css";
 import { polygonDataType, polygonDetailsStateType } from "../../types/types";
-import { dataContext } from "../../context/SharingData";
+import { SVGContext } from "../../context/SharingData";
+import polygonsData from "../../assets/data.json";
 
 function PolygonDetails() {
-	const { svgElement, polygonsData } = useContext(dataContext);
+	const svgElement = useContext(SVGContext);
 	// managing polygon details 's postion, visability, price, number and content
 	const [polygonDetailsState, setPolygonDetailsState] =
 		useState<polygonDetailsStateType>({
@@ -74,7 +75,7 @@ function PolygonDetails() {
 	}
 
 	useEffect(() => {
-		if (svgElement && polygonsData.length !== 0) {
+		if (svgElement) {
 			// Adding event to every polygon to make it's details appears when hover
 			polygonsData.forEach((polygonData: polygonDataType) => {
 				const currentPolygon = svgElement.querySelector(
@@ -85,7 +86,10 @@ function PolygonDetails() {
 					polygonData,
 					currentPolygon
 				);
-				currentPolygon.addEventListener("mouseenter", mouseEnterHandler);
+				currentPolygon.addEventListener(
+					"mouseenter",
+					mouseEnterHandler
+				);
 			});
 			// Cleanup fuction for events fired when unamount polygonDetails Component
 			return () => {
@@ -106,7 +110,7 @@ function PolygonDetails() {
 				});
 			};
 		}
-	}, [svgElement, polygonsData]);
+	}, [svgElement]);
 
 	return (
 		visable && (
@@ -114,10 +118,7 @@ function PolygonDetails() {
 				className="polygon-details-container"
 				style={{ left: `${X}px`, top: `${Y}px` }}
 			>
-				<button
-					className="close-btn"
-					onClick={hidePolygonDetails}
-				>
+				<button className="close-btn" onClick={hidePolygonDetails}>
 					X
 				</button>
 				<p>

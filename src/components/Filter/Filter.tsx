@@ -1,16 +1,17 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./filter.css";
-
+import polygonsData from "../../assets/data.json";
 import {
 	findMaxPrice,
 	fitlerPolygons,
 	handelMaxInput,
 	handelMinInput,
 } from "../../utils/filterFunctionality";
-import { dataContext } from "../../context/SharingData";
+import { SVGContext } from "../../context/SharingData";
+import { useContext } from "react";
 
 function Filter() {
-	const { polygonsData } = useContext(dataContext);
+	const svgElement = useContext(SVGContext);
 	/* useStates to manage the polygons shown or hidden 
 	according to the filter criteria set by the user */
 	const [availability, setAvailability] = useState<string>("all");
@@ -26,19 +27,17 @@ function Filter() {
 
 	useEffect(() => {
 		/* Setting the Inputs maximum value and maximum price current 
-		value when the polygons's data loaded */
-		if (polygonsData.length !== 0) {
-			const getMaxPrice: number = findMaxPrice(polygonsData);
-			setMaxCurrentValue(getMaxPrice);
-			setmaxPrice(getMaxPrice);
-		}
-	}, [polygonsData]);
+		value with polygons's data */
+		const getMaxPrice: number = findMaxPrice(polygonsData);
+		setMaxCurrentValue(getMaxPrice);
+		setmaxPrice(getMaxPrice);
+	}, []);
 
-	/* when the polygons's data loaded and any of 
+	/* when the SVG element loaded and any of 
 	the availability or minimum price or maximum price states changed 
 	the polygons is filtered by filterPolygons function */
 	useEffect((): void => {
-		if (polygonsData.length !== 0) {
+		if (svgElement) {
 			fitlerPolygons(
 				polygonsData,
 				availability,

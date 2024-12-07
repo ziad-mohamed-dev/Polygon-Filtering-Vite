@@ -31,11 +31,10 @@ export function handelMinInput(
 			spanRef.current.style.width = `${
 				((maxCurrentValue - inputCurrentValue) / maxPrice) * 100
 			}%`;
-		} 
-		/* If the gap between the value the user want to selecting it and the 
+		} else {
+			/* If the gap between the value the user want to selecting it and the 
     maximum state is less than price gap so set the minimum state 
     to (maximum input value - price gap) */
-    else {
 			setCurrentMinValue(maxCurrentValue - priceGap);
 			spanRef.current.style.left = `${
 				((maxCurrentValue - priceGap) / maxPrice) * 100
@@ -63,18 +62,18 @@ export function handelMaxInput(
 			spanRef.current.style.width = `${
 				((inputCurrentValue - minCurrentValue) / maxPrice) * 100
 			}%`;
-		}
-    /* If the gap between the value the user want to selecting it and the 
+		} else {
+			/* If the gap between the value the user want to selecting it and the 
     minimum state is less than price gap so set the maximum state 
     to (minimum input value + price gap) */
-    else {
 			setCurrentMaxValue(minCurrentValue + priceGap);
 			spanRef.current.style.width = `${(priceGap / maxPrice) * 100}%`;
 		}
 	}
 }
 
-/* Filtering polygons depending on the availability or miniumum 
+/*
+Filtering polygons depending on the availability or miniumum 
 or maximum price with adding or removing classes
 
 show polygon when polygon's data is 

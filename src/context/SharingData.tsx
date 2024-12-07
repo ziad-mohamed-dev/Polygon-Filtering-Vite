@@ -1,25 +1,18 @@
 import { createContext, useEffect, useState } from "react";
-import { polygonDataType } from "../types/types";
+import SVGApi from "../assets/0-floor.svg";
 
-/*  Creating context to share the svg element and polygons's 
-data between all componets in the app */
-export const dataContext = createContext<{
-	svgElement: HTMLElement | undefined;
-	polygonsData: polygonDataType[] | never[];
-}>({ svgElement: undefined, polygonsData: [] });
+/*  Creating context to controll the SVG element between all componets in the app */
+export const SVGContext = createContext<HTMLElement | undefined>(undefined);
 
-function SharingData({ children }: { children: React.ReactNode }) {
-	// useState to handel storing data and state chaning in the app
+function ControllingSVG({ children }: { children: React.ReactNode }) {
+	// useState to contrlling SVG in the app
 	const [svgElement, setSvgElement] = useState<HTMLElement | undefined>(
 		undefined
 	);
-	const [polygonsData, setPolygonsData] = useState<
-		polygonDataType[] | never[]
-	>([]);
 
 	useEffect(() => {
 		// Fetching the svg element and pasring it from string to html element
-		fetch("/src/assets/0-floor.svg")
+		fetch(SVGApi)
 			.then((res) => res.text())
 			.then((svgText) => {
 				const parser = new DOMParser();
@@ -28,19 +21,11 @@ function SharingData({ children }: { children: React.ReactNode }) {
 						.documentElement
 				);
 			});
-		// Fetching the polygons's data and converting it from json
-		fetch("/src/assets/data.json")
-			.then((res) => res.json())
-			.then((data) => {
-				setPolygonsData(data);
-			});
 	}, []);
 
 	return (
-		<dataContext.Provider value={{ svgElement, polygonsData }}>
-			{children}
-		</dataContext.Provider>
+		<SVGContext.Provider value={svgElement}>{children}</SVGContext.Provider>
 	);
 }
 
-export default SharingData;
+export default ControllingSVG;
