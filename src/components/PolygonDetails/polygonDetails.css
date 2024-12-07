@@ -1,0 +1,76 @@
+.polygon-details-container {
+	position: fixed;
+	width: 180px;
+	background-color: rgb(65 65 65 /0.5);
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+@media (min-width: 481px) {
+	.polygon-details-container {
+		width: 210px;
+	}
+}
+
+.polygon-details-container .close-btn {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid white;
+	outline: none;
+	border-radius: 5px;
+	background-color: white;
+	color: black;
+	margin-left: calc(100% - 20px);
+	cursor: pointer;
+}
+
+.polygon-details-container .close-btn:hover {
+	background-color: transparent;
+	color: white;
+}
+
+.polygon-details-container p {
+	display: flex;
+	justify-content: space-between;
+	margin: 5px 0;
+	text-transform: capitalize;
+}
+
+.polygon-details-container .callback-btn {
+	border: 1px solid white;
+	outline: none;
+	width: 100%;
+	padding: 5px;
+	border-radius: 5px;
+	font-weight: 300;
+	cursor: pointer;
+	background-color: white;
+	color: black;
+}
+
+.polygon-details-container .callback-btn:hover {
+	background-color: transparent;
+	color: white;
+}
+
+.polygon-details-container p span {
+	padding: 7px;
+}
+
+.polygon-details-container p .availability {
+	border-radius: 10px;
+}
+
+.polygon-details-container p .available {
+	background-color: var(--available-color);
+}
+
+.polygon-details-container p .reserved {
+	background-color: var(--reserved-color);
+}
+
+.polygon-details-container p .sold {
+	background-color: var(--sold-color);
+}

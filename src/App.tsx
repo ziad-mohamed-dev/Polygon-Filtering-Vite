@@ -1,28 +1,30 @@
-import image from './assets/0-floor.png';
-import svgOverlay from './assets/0-floor.svg';
+import { useContext, useEffect } from "react";
+import image from "./assets/0-floor.png";
+import Filter from "./components/Filter/Filter";
+import { dataContext } from "./context/SharingData";
+import PolygonDetails from "./components/PolygonDetails/PolygonDetails";
 
 function App() {
-  return (
-    <>
-      <img style={{
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#272727',
-        objectFit: 'cover'
-      }} src={image} />
-      <img style={{
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover'
-      }} src={svgOverlay} />
-    </>
-  )
+	const { svgElement } = useContext(dataContext);
+
+	// Replace the svg holder with the svg element when it is fetched
+	useEffect(() => {
+		if (svgElement) {
+			const svgHolder: SVGElement = document.querySelector(
+				"main .svg-holder"
+			) as SVGElement;
+			svgHolder && svgHolder.replaceWith(svgElement as HTMLElement);
+		}
+	}, [svgElement]);
+
+	return (
+		<main>
+			<img src={image} />
+			<svg className="svg-holder"></svg>
+			<Filter />
+			<PolygonDetails />
+		</main>
+	);
 }
 
-export default App
+export default App;
