@@ -1,0 +1,25 @@
+.loading-container {
+	position: fixed;
+	z-index: 5;
+	inset: 0;
+	background-color: #272727;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading-container span {
+	display: inline-block;
+	border: 3px solid white;
+  border-left-color: transparent;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+  animation: spin 1s infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
