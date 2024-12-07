@@ -10,10 +10,8 @@ function App() {
 	// Replace the svg holder with the svg element when it is fetched
 	useEffect(() => {
 		if (svgElement) {
-			const svgHolder: SVGElement = document.querySelector(
-				"main .svg-holder"
-			) as SVGElement;
-			svgHolder.replaceWith(svgElement as HTMLElement);
+			const svgHolder: Element | null = document.querySelector("main .svg-holder");
+			svgHolder && svgHolder.replaceWith(svgElement);
 		}
 	}, [svgElement]);
 
