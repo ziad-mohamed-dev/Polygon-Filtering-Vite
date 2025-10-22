@@ -23,7 +23,7 @@ function Filter() {
 	the range bar between minimum and maximum price*/
 	const spanRef = useRef<HTMLSpanElement>(null);
 	// price gap 10% between minimum and maximum price
-	const priceGap: number = parseInt(0.1 * maxPrice);
+	const priceGap: number = 0.1 * maxPrice;
 
 	useEffect(() => {
 		/* Setting the Inputs maximum value and maximum price current 
